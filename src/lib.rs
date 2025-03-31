@@ -206,7 +206,9 @@ async fn fetch_comment_with_replies(
 
             for result in results {
                 if let Ok(reply) = result {
-                    replies.push(reply)
+                    if reply.text.is_some() {
+                        replies.push(reply)
+                    }
                 }
             }
         }
