@@ -63,8 +63,8 @@ async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
         return Response::error("Method Not Allowed", 405);
     }
 
-    if path.starts_with("/api/story/") {
-        let story_id = path.trim_start_matches("/api/story/");
+    if path.starts_with("/v1/hn/story/") {
+        let story_id = path.trim_start_matches("/v1/hn/story/");
         if !story_id.chars().all(char::is_numeric) {
             return Response::error("Invalid Story ID", 400);
         }
@@ -118,8 +118,8 @@ async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
             </head>
             <body>
                 <h1>Hacker News Comments API</h1>
-                <p>Basic usage: <code>/api/story/{story_id}</code></p>
-                <p>Example: <a href="/api/story/36919310">/api/story/36919310</a></p>
+                <p>Basic usage: <code>/v1/hn/story/{story_id}</code></p>
+                <p>Example: <a href="/v1/hn/story/43530889">/v1/hn/story/43530889</a></p>
                 
                 <h2>Query Parameters</h2>
                 <table>
@@ -133,18 +133,18 @@ async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
                         <td>depth</td>
                         <td>Comment recursion depth, 0 means top-level comments only</td>
                         <td>10</td>
-                        <td><a href="/api/story/36919310?depth=2">?depth=2</a></td>
+                        <td><a href="/v1/hn/story/43530889?depth=2">?depth=2</a></td>
                     </tr>
                     <tr>
                         <td>limit</td>
                         <td>Maximum number of comments per level</td>
                         <td>No limit</td>
-                        <td><a href="/api/story/36919310?limit=5">?limit=5</a></td>
+                        <td><a href="/v1/hn/story/43530889?limit=5">?limit=5</a></td>
                     </tr>
                 </table>
                 
                 <h2>Combined Query Examples</h2>
-                <p>Limit depth and count: <a href="/api/story/36919310?depth=1&limit=10">/api/story/36919310?depth=1&limit=10</a></p>
+                <p>Limit depth and count: <a href="/v1/hn/story/43530889?depth=1&limit=10">/v1/hn/story/43530889?depth=1&limit=10</a></p>
                 
                 <p>Performance note: Worker now supports up to 5 minutes of processing time. For large stories, you can optimize performance by adjusting depth and limit parameters.</p>
             </body>
