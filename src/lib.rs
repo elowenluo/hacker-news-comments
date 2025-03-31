@@ -249,7 +249,9 @@ async fn fetch_story_with_comments(
 
         for result in results {
             if let Ok(comment) = result {
-                comments.push(comment);
+                if comment.text.is_some() {
+                    comments.push(comment);
+                }
             }
         }
     }
